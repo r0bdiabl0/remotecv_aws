@@ -24,14 +24,15 @@ class Bucket(object):
         """
         self._bucket = bucket
         
-        session = Session(
-                        aws_access_key_id=accessKeyId,
-                        aws_secret_access_key=secretAccessKey,
-                        region_name=region,
-                        endpoint_url=endpoint
-                  )
+        session = Session()
 
-        self._client = session.resource('s3')
+        self._client = session.client(
+            service_name='s3',
+            aws_access_key_id=accessKeyId,
+            aws_secret_access_key=secretAccessKey,
+            region_name=region,
+            endpoint_url=endpoint
+        )
 
     def get(self, path):
         """
