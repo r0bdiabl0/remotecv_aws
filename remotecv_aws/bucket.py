@@ -24,9 +24,7 @@ class Bucket(object):
         """
         self._bucket = bucket
         
-        session = Session()
-
-        self._client = session.client(
+        self._client = Session().client(
             service_name='s3',
             aws_access_key_id=accessKeyId,
             aws_secret_access_key=secretAccessKey,
@@ -40,8 +38,8 @@ class Bucket(object):
         :param string path: Path or 'key' to retrieve AWS object
         """
 
-        file_path = self._client.Bucket(self._bucket).Object(path).get()
+        response = self._client.get_object(Bucket=self._bucket, Key=path)
 
-        return file_path['Body'].read()
+        return response['Body'].read()
         
 
