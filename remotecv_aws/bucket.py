@@ -13,7 +13,7 @@ class Bucket(object):
     _bucket      = None
     _local_cache = dict()
 
-    def __init__(self, bucket, region, accessKeyId, secretAccessKey):
+    def __init__(self, bucket, region, endpoint, accessKeyId, secretAccessKey):
         """
         Constructor
         :param string bucket: The bucket name
@@ -27,7 +27,8 @@ class Bucket(object):
         session = Session(
                         aws_access_key_id=accessKeyId,
                         aws_secret_access_key=secretAccessKey,
-                        region_name=region
+                        region_name=region,
+                        endpoint_url=endpoint
                   )
 
         self._client = session.resource('s3')

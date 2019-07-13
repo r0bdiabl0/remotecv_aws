@@ -12,10 +12,11 @@ def load_sync(path):
     Loads image from S3
     :param string path: Path to load
     """
-    bucket = os.environ.get('AWS_LOADER_BUCKET')
-    region = os.environ.get('AWS_REGION', 'eu-west-1')
+    bucket = os.environ.get('TC_AWS_LOADER_BUCKET')
+    region = os.environ.get('TC_AWS_REGION', 'eu-west-1')
     accessKeyId = os.environ.get('AWS_ACCESS_KEY_ID')
-    secretAccessKey = os.environ.get('AWS_SECRET_KEY_ID')
-    bucket_loader = Bucket(bucket, region, accessKeyId, secretAccessKey)
+    secretAccessKey = os.environ.get('AWS_SECRET_ACCESS_KEY')
+    endpoint =  os.environ.get('TC_AWS_ENDPOINT')
+    bucket_loader = Bucket(bucket, region, endpoint, accessKeyId, secretAccessKey)
 
     return bucket_loader.get(path)
