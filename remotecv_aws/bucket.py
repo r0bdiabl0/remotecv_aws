@@ -5,6 +5,7 @@
 # found in the LICENSE file.
 
 from boto3.session import Session
+import urllib
 
 class Bucket(object):
     """
@@ -37,6 +38,8 @@ class Bucket(object):
         Returns object at given path
         :param string path: Path or 'key' to retrieve AWS object
         """
+        
+        urllib.unquote(path)
 
         response = self._client.get_object(Bucket=self._bucket, Key=path)
 
